@@ -36,6 +36,11 @@ app.use(ratelimiter({
   windowMs: 15 * 60 * 1000, // 15 minutes
 	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 }))
+
+app.get('/', (req, res) => {
+  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+});
+
 //routes
 app.use('/api/v1/auth',router)
 app.use('/api/v1/jobs',verifyUser,jobsRouter)
