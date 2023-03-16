@@ -13,6 +13,11 @@ const xss = require ('xss-clean')
 //express-rate-limit - protects against bruteforce attacks
 const ratelimiter = require ('express-rate-limit')
 
+//swagger
+const swaggerUI = require ('swagger-ui-express')
+const YAML = require ('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 //router
 const router = require ('./routes/auth')
 const jobsRouter = require ('./routes/jobs')
@@ -40,7 +45,7 @@ app.use(ratelimiter({
 app.get('/', (req, res) => {
   res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
 });
-//app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 
 //routes
